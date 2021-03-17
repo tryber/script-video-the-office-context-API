@@ -1,0 +1,82 @@
+body {
+  background-color: black;
+  background-size: cover;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+}
+
+.App {
+  background-color: black;
+  background-size: cover;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+  /* display: flex; */
+  position: relative;
+}
+
+.container {
+  background-color: #5b91d6;
+  border-radius: 2px;
+  border: 3px solid rgba(0, 0, 0, 0.125);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.418);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  height: 20%;
+  margin: 5px;
+  width: 300px;
+}
+
+.body {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.btn {
+  background-image: linear-gradient(to right, #000000 0%, #0f0f0f  51%, #0f0e0e  100%);
+  border-radius: 5px;
+  border: 1px solid white;
+  color: white;
+  font-size: 1em;
+  font-weight: 700;
+  justify-content: center;
+  margin: 4px 6px;
+  padding: 8px;
+  text-align: center;
+  transition: 0.5s;
+}
+
+.show-fav-btn {
+  align-items: center;
+  border: 1px solid white;
+  display: flex;
+  height: 35px;
+  justify-content: center;
+}
+
+.input-number {
+  border-radius: 3px;
+  width: 65px;
+  border: 1px solid white;
+}
+
+/* .footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+} */
