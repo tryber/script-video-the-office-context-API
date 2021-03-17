@@ -15,7 +15,7 @@
 **OE** Copiar e colar a estilização de `index.css` desta aplicação.
 
 ## Criando o `Context`
-- Dentro da pasta Context, criaremos nosso arquivo de contexto que chamaremos de TheOfficeContext:
+- Dentro da pasta `Context`, criaremos nosso arquivo de contexto que chamaremos de `TheOfficeContext`:
 
 ``` JS
 // TheOfficeContext.js
@@ -25,6 +25,7 @@ import { createContext } from 'react';
 const TheOfficeContext = createContext();
 
 export default TheOfficeContext;
+
 ```
 
 ## Requisição à API
@@ -45,6 +46,7 @@ const getEpisodes = () => (
 );
 
 export default getEpisodes;
+
 ```
 
 ## Criando o `Provider`
@@ -95,6 +97,7 @@ TheOfficeProvider.propTypes = {
 };
 
 export default TheOfficeProvider;
+
 ```
 
 ## Componentes
@@ -102,7 +105,7 @@ export default TheOfficeProvider;
 - Os componentes serão: `Header.jsx`, `EpisodesCards.jsx`, `FavoritesCards.jsx` e `Filters.jsx`;
 
 ``` JS
-// EpisodesCards.jsx
+// Header.jsx
 
 import React from 'react';
 export default function Header({ history }) {
@@ -111,6 +114,7 @@ export default function Header({ history }) {
     </div>
   );
 }
+
 ```
 
 ``` JS
@@ -123,10 +127,11 @@ export default function EpisodesCards() {
     </div>
   );
 }
+
 ```
 
 ``` JS
-// EpisodesCards.jsx
+// FavoritesCards.jsx
 
 import React from 'react';
 export default function FavoritesCards() {
@@ -135,6 +140,7 @@ export default function FavoritesCards() {
     </div>
   );
 }
+
 ```
 
 ``` JS
@@ -147,10 +153,11 @@ export default function Filters() {
     </div>
   );
 }
+
 ```
 
 ## Páginas
-- Agora, na pasta Pages, criaremos nossas páginas: Episodes e Favorites:
+- Agora, na pasta Pages, criaremos nossas páginas: `Episodes` e `Favorites`:
   - Importar os componentes que criamos e iseri-los no `return`;
   - Para construirmos um `Header` dinâmico usando o `pathname`, vamos passar como `props` o `history` nas duas páginas e, para não termos problemas com o `ESLint` por isso, teremos que colocar também os `propTypes`;
   - Importação de uma imagem para ser usada como footer da pasta images;
@@ -158,6 +165,7 @@ export default function Filters() {
 
 ``` JS
 // Episodes.js
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
@@ -185,10 +193,12 @@ Episodes.propTypes = {
     }),
   }).isRequired,
 };
+
 ```
 
 ``` JS
 // Favorites.js
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
@@ -214,10 +224,11 @@ Favorites.propTypes = {
     }),
   }).isRequired,
 };
+
 ```
 
 ## Rotas
-- Adicionar as rotas das páginas no arquivo `App.js`:
+- Hora de adicionar as rotas das páginas no arquivo `App.js`:
 
 ``` JS
 // App.js
@@ -247,9 +258,12 @@ export default function App() {
     </Provider>
   );
 }
-```
 
-## Header
+```
+- Agora você já consegue ver a imagem que colocamos como `footer`.
+**OE** Talvez você precise instalar `npm install -S react-router-dom`, interromper e dar um `npm start` novamente para resolver o erro *"Module not found: Can't resolve 'react-router-dom'"*.
+
+## Components - Header
 - Importar imagem da logo da página images;
 - Passar `history` como parâmetro da função do componente e desestruturá-lo para pegar também o `pathname`.
 - Adiciona a imagem da logo da série; 
@@ -302,14 +316,15 @@ Header.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
+
 ```
 
-- Agora você já consegue dar um `npm start` e ver coisas renderizadas na tela.
+- Agora, além da imagem de `footer`, o `header` também está visível na aplicação.
 
-##  Cards dos Episódios
+##  Components - EpisodesCards
 - Importar o `useContext` e o contexto criado na aplicação ( `TheOfficeContext`)
-- Pegar o estado epCopy armazenado no Provider, fazer um map nele e renderizar os cards com uma *thumbnail*, o nome do episódio, a temporada e o número do episódio;
-- Não esquecer de colocar uma key;
+- Pegar o estado `epCopy` armazenado no `Provider`, fazer um `map` nele e renderizar os cards com uma *thumbnail*, o nome do episódio, a temporada e o número do episódio;
+- Não esquecer de colocar uma `key`;
 - Botão muda texto caso o episódio do card esteja nos favoritos, mas como ainda não tem função, só mostra no console a mensagem "ainda não funciono";
 **OE** É importante que sejam inseridas as `className`s para que o arquivo `index.css` possa aplicar a estilização corretamente.
 
@@ -360,9 +375,12 @@ export default function EpisodesCards() {
     </div>
   );
 }
+
 ```
 
-## Favoritos
+- Neste momento, os cards e a aparência da página principal já está pronta.
+
+## Components - FavoritesCards
 
 - O estado `favorites` continua vazio no `Provider` e para podermos ter algo para renderizar na página de favoritos, temos que criar uma função que adiciona cards aos favoritos.
 
@@ -372,7 +390,7 @@ export default function EpisodesCards() {
   - Criar a função que adiciona e remove ítens dos favoritos
   - Dentro dessa função, lembrar que ao setar o estado de `favorites` que não seja o retorno de um `filter` (que já retorna um `array`), é necessário envolver o estado a ser setado em um `array`;
   - Lembrar de fazer o `spread` de favorites para acumular o que já está no estado e não sobreescrever
-  - Colocar a função no ContextValue
+  - Colocar a função no `ContextValue`
 
 ``` JSX
 // Provider.js
@@ -426,8 +444,8 @@ export default function EpisodesCards() {
 ```
 
 ### Voltando ao componente EpisodesCards
-- Importar função função de adicionar aos Favoritos
-- Chamá-la no botão de favoritar na página dos Episódios
+- Importar função função de adicionar aos Favoritos;
+- Chamá-la no botão de favoritar na página dos Episódios, colocando `episode` como parâmetro.
 
 ``` JSX
 // EpisodesCards.jsx
@@ -476,9 +494,9 @@ export default function EpisodesCards() {
 //   );
 // }
 ```
-- Agora, se você checar no `React Dev Tools`, verá que o estado de favorites já está sendo alterado a medida que você clica no botão.
+- Agora, clicando no botão, vemos que o texto muda dinamicamente e, ao checar no `React Dev Tools`, vemos que o estado de `favorites` já está sendo alterado ao clique do botão.
 
-### Cards de episódios favoritos
+### Components - FavoritesCards
 - Com o estado de favoritos, a construção do componente é igual ao da página inicial com a unica exceção de que o `map` é feito a partir de `favorites`, que é o estado a ser importado do nosso contexto junto com a função de adicionar ou remover dos favoritos.
 **OE** É importante que sejam inseridas as `className`s para que o arquivo `index.css` possa aplicar a estilização corretamente.
 
@@ -527,15 +545,17 @@ export default function FavoritesCards() {
     </div>
   );
 }
+
 ```
 - Agora, se você adicionar algum episódio aos favoritos, já poderá vê-lo na página `Favorites`, clicando no botão do `Header`.
 
 ## Filtros
 - Agora, precisamos construir nossos filtros para tornar possível selecionar temporadas ou episódios.
-- Começaremos pelo componente
-  - Faremos dois inputs do tipo radio button para determinar se o filtro será feito por temporada ou por episódio
-  - Um input do tipo número para pegar o comparativo numérico para o episódio ou a temporada a ser filtrado;
-  - Setaremos estados locais para armazenar os valores dos inputs e fazermos as comparações
+- Começaremos pelo componente `Filters.jsx`:
+  - Faremos dois `inputs` do tipo `radio button` para determinar se o filtro será feito por temporada ou por episódio
+  - Um `input` do **tipo número** para pegar o comparativo numérico para o episódio ou a temporada a ser filtrado;
+  - Setaremos estados locais para armazenar os valores dos `inputs` e fazermos as comparações
+  - Já podemos ver os estados sendo alterados no `React Dev Tools`;
   - Como o botão de filtrar ainda não tem uma função associada, simplesmente mostra no console a mensagem "Ainda não funciono";
 **OE** É importante que sejam inseridas as `className`s para que o arquivo `index.css` possa aplicar a estilização corretamente.
 
@@ -594,6 +614,7 @@ export default function Filters() {
     </div>
   );
 }
+
 ```
 - Por uma questão de organização, faremos a função que efetivamente filtra os cards no `Provider`.
 
@@ -671,9 +692,12 @@ export default function Filters() {
 // export default TheOfficeProvider;
 ```
 
-- Agora que a função de filtrar já existe, só precisamos importá-la na página Filters.jsx e chamá-la no botão `Filtrar`.
-  - importar `useContext`
-  -importar contexto
+### Em Filters.jsx
+- Agora que a função de filtrar já existe, só precisamos:
+  - importar `useContext`;
+  - importar contexto;
+  - desestruturar o contexto para trazer a função `applyFilters`;
+  - inserir a função no click do botão setando como parâmetros os estados `filterBy` e `number`.
 
 ``` JSX
 // Filters.jsx
