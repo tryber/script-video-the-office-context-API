@@ -66,20 +66,20 @@ import FetchAPI from '../Services/FetchAPI';
 
 function TheOfficeProvider({ children }) {
   const [allEpisodes, setAllEpisodes] = useState([]);
-  const [epCopy, setEpCopy] = useState([]);
+  const [allEpisodesCopy, setAllEpisodesCopy] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     const getEpisodes = async () => {
       const { _embedded: { episodes } } = await FetchAPI();
       setAllEpisodes(episodes);
-      setEpCopy(episodes);
+      setAllEpisodesCopy(episodes);
     };
     getEpisodes();
   }, []);
 
   const contextValue = {
-    epCopy,
+    allEpisodesCopy,
     favorites,
   };
 
@@ -93,7 +93,7 @@ function TheOfficeProvider({ children }) {
 }
 
 TheOfficeProvider.propTypes = {
-  children: PropTypes.objectOf(PropTypes.any).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default TheOfficeProvider;
@@ -171,7 +171,7 @@ import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import EpisodesCards from '../Components/EpisodesCards';
 import Filters from '../Components/Filters';
-import footer from '../images/DunderMifflin.png';
+import footerImage from '../images/DunderMifflin.png';
 
 export default function Episodes({ history }) {
   return (
@@ -179,9 +179,9 @@ export default function Episodes({ history }) {
       <Header history={ history } />
       <Filters />
       <EpisodesCards />
-      <div className="footer">
-        <img className="footer" src={ footer } alt="the office logo" width="250px" />
-      </div>
+      <footer className="footer">
+        <img className="footer" src={ footerImage } alt="the office logo" width="250px" />
+      </footer>
     </div>
   );
 }
@@ -202,7 +202,7 @@ Episodes.propTypes = {
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
-import footer from '../images/DunderMifflin.png';
+import footerImage from '../images/DunderMifflin.png';
 import FavoritesCards from '../Components/FavoritesCards';
 
 export default function Favorites({ history }) {
@@ -210,9 +210,9 @@ export default function Favorites({ history }) {
     <div className="App">
       <Header history={ history } />
       <FavoritesCards />
-      <div className="footer">
-        <img src={ footer } alt="the office logo" width="250px" />
-      </div>
+      <footer className="footer">
+        <img src={ footerImage } alt="the office logo" width="250px" />
+      </footer>
     </div>
   );
 }
@@ -336,13 +336,13 @@ import React, { useContext } from 'react';
 import TheOfficeContext from '../Context/TheOfficeContext';
 
 export default function EpisodesCards() {
-  const { epCopy, favorites } = useContext(TheOfficeContext);
+  const { allEpisodesCopy, favorites } = useContext(TheOfficeContext);
 
   return (
     <div>
       <section className="body">
         {
-          epCopy
+          allEpisodesCopy
             .map((episode) => (
               <div key={ episode.id } className="container">
                 <img src={ episode.image.medium } alt={ episode.name } />
@@ -402,7 +402,7 @@ export default function EpisodesCards() {
 
 // function TheOfficeProvider({ children }) {
 //   const [allEpisodes, setAllEpisodes] = useState([]);
-//   const [epCopy, setEpCopy] = useState([]);
+//   const [allEpisodesCopy, setAllEpisodesCopy] = useState([]);
 //   const [favorites, setFavorites] = useState([]);
      const zero = 0;
 
@@ -410,7 +410,7 @@ export default function EpisodesCards() {
 //     const getEpisodes = async () => {
 //       const { _embedded: { episodes } } = await FetchAPI();
 //       setAllEpisodes(episodes);
-//       setEpCopy(episodes);
+//       setAllEpisodesCopy(episodes);
 //     };
 //     getEpisodes();
 //   }, []);
@@ -422,7 +422,7 @@ export default function EpisodesCards() {
 
 //   const contextValue = {
 //     favorites,
-//     epCopy,
+//     setAllEpisodesCopy,
        toggleFavorites,
 //   };
 
@@ -436,7 +436,7 @@ export default function EpisodesCards() {
 // }
 
 // TheOfficeProvider.propTypes = {
-//   children: PropTypes.objectOf(PropTypes.any).isRequired,
+//   children: PropTypes.node.isRequired,
 // };
 
 // export default TheOfficeProvider;
@@ -454,13 +454,13 @@ export default function EpisodesCards() {
 // import TheOfficeContext from '../Context/TheOfficeContext';
 
 // export default function EpisodesCards() {
-     const { epCopy, favorites, toggleFavorites } = useContext(TheOfficeContext);
+     const { allEpisodesCopy, favorites, toggleFavorites } = useContext(TheOfficeContext);
 
 //   return (
 //     <div>
 //       <section className="body">
 //         {
-//           epCopy
+//           allEpisodesCopy
 //             .map((episode) => (
 //               <div key={ episode.id } className="container">
 //                 <img src={ episode.image.medium } alt={ episode.name } />
@@ -635,7 +635,7 @@ export default function Filters() {
 
 // function TheOfficeProvider({ children }) {
 //   const [allEpisodes, setAllEpisodes] = useState([]);
-//   const [epCopy, setEpCopy] = useState([]);
+//   const [allEpisodesCopy, setAllEpisodesCopy] = useState([]);
 //   const [favorites, setFavorites] = useState([]);
 //   const zero = 0;
 
@@ -644,10 +644,10 @@ export default function Filters() {
          const newArray = [...allEpisodes];
          switch (filterBy) {
          case ('episode'):
-           setEpCopy(newArray.filter((ep) => Number(ep.number) ===  Number(number)));
+           setAllEpisodesCopy(newArray.filter((ep) => Number(ep.number) ===  Number(number)));
            break;
          case ('season'):
-           setEpCopy(newArray.filter((ep) => Number(ep.season) ===  Number(number)));
+           setAllEpisodesCopy(newArray.filter((ep) => Number(ep.season) ===  Number(number)));
            break;
          default:
            return newArray;
@@ -659,7 +659,7 @@ export default function Filters() {
 //     const getEpisodes = async () => {
 //       const { _embedded: { episodes } } = await FetchAPI();
 //       setAllEpisodes(episodes);
-//       setEpCopy(episodes);
+//       setAllEpisodesCopy(episodes);
 //     };
 //     getEpisodes();
 //   }, []);
@@ -671,7 +671,7 @@ export default function Filters() {
 
 //   const contextValue = {
 //     favorites,
-//     epCopy,
+//     allEpisodesCopy,
 //     toggleFavorites,
        applyFilters,
 //   };
@@ -686,7 +686,7 @@ export default function Filters() {
 // }
 
 // TheOfficeProvider.propTypes = {
-//   children: PropTypes.objectOf(PropTypes.any).isRequired,
+//   children: PropTypes.node.isRequired,
 // };
 
 // export default TheOfficeProvider;
