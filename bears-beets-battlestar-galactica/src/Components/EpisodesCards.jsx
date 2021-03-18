@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import TheOfficeContext from '../Context/TheOfficeContext';
 
 export default function EpisodesCards() {
-  const { epCopy, favorites, toggleFavorites } = useContext(TheOfficeContext);
+  const { allEpisodesCopy, favorites, toggleFavorites } = useContext(TheOfficeContext);
 
   return (
     <div>
       <section className="body">
         {
-          epCopy
+          allEpisodesCopy
             .map((episode) => (
               <div key={ episode.id } className="container">
                 <img src={ episode.image.medium } alt={ episode.name } />
