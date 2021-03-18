@@ -497,7 +497,7 @@ export default function EpisodesCards() {
 - Agora, clicando no botão, vemos que o texto muda dinamicamente e, ao checar no `React Dev Tools`, vemos que o estado de `favorites` já está sendo alterado ao clique do botão.
 
 ### Components - FavoritesCards
-- Com o estado de favoritos, a construção do componente é igual ao da página inicial com a unica exceção de que o `map` é feito a partir de `favorites`, que é o estado a ser importado do nosso contexto junto com a função de adicionar ou remover dos favoritos.
+- Com o estado de favoritos, a construção do componente é igual ao da página inicial com a única exceção de que o `map` é feito a partir de `favorites`, que é o estado a ser importado do nosso contexto junto com a função de adicionar ou remover dos favoritos.
 **OE** É importante que sejam inseridas as `className`s para que o arquivo `index.css` possa aplicar a estilização corretamente.
 
 ``` JSX
@@ -622,7 +622,8 @@ export default function Filters() {
 
   - Criar a função de filtrar;
     - Usar método `Number()` para transformar retorno do input de `string` para `number`
-    - Criando uma cópia do estado para fazer as filtragens sem que os valores do estado de comparação seja alterado;
+    - Criando uma cópia do estado para fazer as filtragens sem que os valores do estado de comparação sejam alterados;
+    - Setar o resultado dos filtros no estado `allEpisodesCopy`, que é o renderizado na página principal;
     - Colocar a função para ser exportada no `ContextValue`;
 
 ``` JSX
