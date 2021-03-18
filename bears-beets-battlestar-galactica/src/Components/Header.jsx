@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from '../images/theOffice.png';
+
 export default function Header({ history }) {
   const { location: { pathname } } = history;
   const path = pathname;

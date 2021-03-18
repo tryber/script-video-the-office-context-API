@@ -5,7 +5,7 @@ import FetchAPI from '../Services/FetchAPI';
 
 function TheOfficeProvider({ children }) {
   const [allEpisodes, setAllEpisodes] = useState([]);
-  const [epCopy, setEpCopy] = useState([]);
+  const [allEpisodesCopy, setAllEpisodesCopy] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const zero = 0;
 
@@ -14,10 +14,10 @@ function TheOfficeProvider({ children }) {
       const newArray = [...allEpisodes];
       switch (filterBy) {
       case ('episode'):
-        setEpCopy(newArray.filter((ep) => Number(ep.number) === Number(number)));
+        setAllEpisodesCopy(newArray.filter((ep) => Number(ep.number) === Number(number)));
         break;
       case ('season'):
-        setEpCopy(newArray.filter((ep) => Number(ep.season) === Number(number)));
+        setAllEpisodesCopy(newArray.filter((ep) => Number(ep.season) === Number(number)));
         break;
       default:
         return newArray;
@@ -29,7 +29,7 @@ function TheOfficeProvider({ children }) {
     const getEpisodes = async () => {
       const { _embedded: { episodes } } = await FetchAPI();
       setAllEpisodes(episodes);
-      setEpCopy(episodes);
+      setAllEpisodesCopy(episodes);
     };
     getEpisodes();
   }, []);
@@ -40,7 +40,7 @@ function TheOfficeProvider({ children }) {
     : setFavorites([...favorites, item]));
 
   const contextValue = {
-    epCopy,
+    allEpisodesCopy,
     favorites,
     toggleFavorites,
     applyFilters,
@@ -56,7 +56,7 @@ function TheOfficeProvider({ children }) {
 }
 
 TheOfficeProvider.propTypes = {
-  children: PropTypes.objectOf(PropTypes.any).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default TheOfficeProvider;
